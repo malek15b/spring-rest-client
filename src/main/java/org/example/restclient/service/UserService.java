@@ -40,4 +40,12 @@ public class UserService {
                 .retrieve()
                 .body(ResponseUser.class);
     }
+
+    public List<User> getAllList() {
+        User[] users = this.restClient.get()
+                .uri(CHARACTER_ENDPOINT)
+                .retrieve()
+                .body(User[].class);
+        return List.of(users);
+    }
 }
