@@ -21,6 +21,10 @@ public class CharacterService {
                 .build();
     }
 
+    public CharacterService() {
+        this.restClient = null;
+    }
+
     public List<Character> getAll() {
         return this.restClient.get()
                 .uri(CHARACTER_ENDPOINT)
