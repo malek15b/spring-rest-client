@@ -5,6 +5,7 @@ import org.example.restclient.model.RequestUser;
 import org.example.restclient.model.ResponseUser;
 import org.example.restclient.model.User;
 import org.example.restclient.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,18 @@ public class UserController {
     @PostMapping("/users")
     public ResponseUser createUser(@RequestBody RequestUser user) {
         return userService.createUser(user);
+    }
+
+    @GetMapping("fail")
+    public String fail() {
+        throw  new RuntimeException("fail");
+    }
+
+    //Local Exception Handler
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handelRuntimeException(RuntimeException e) {
+        return e.getMessage();
     }
 
 }
